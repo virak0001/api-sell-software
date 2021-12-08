@@ -8,7 +8,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller as Controller;
 
-
 class BaseController extends Controller
 {
     /**
