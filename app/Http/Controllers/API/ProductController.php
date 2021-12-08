@@ -38,7 +38,8 @@ class ProductController extends BaseController implements ProductControllerInter
 
         $validator = Validator::make($input, [
             'name' => 'required',
-            'detail' => 'required'
+            'price' => 'required',
+            'description' => 'required'
         ]);
 
         if($validator->fails()){
