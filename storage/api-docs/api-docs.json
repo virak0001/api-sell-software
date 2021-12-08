@@ -1,0 +1,227 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Your super  ApplicationAPI",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/products?page={page}&limit={limit}&orderBy={orderBy}&sortedBy={sortedBy}&include={include}&search={search}&searchJoin={searchJoin}": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get uom list information",
+                "description": "Fetch product data.",
+                "operationId": "get-uom",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "path",
+                        "description": "Page number",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "default": 1,
+                            "minimum": 1
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "path",
+                        "description": "Page limit",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "default": 20,
+                            "minimum": 1
+                        }
+                    },
+                    {
+                        "name": "orderBy",
+                        "in": "path",
+                        "description": "Order by",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "created_at"
+                        }
+                    },
+                    {
+                        "name": "sortedBy",
+                        "in": "path",
+                        "description": "Sorted by",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "asc"
+                        }
+                    },
+                    {
+                        "name": "include",
+                        "in": "path",
+                        "description": "The relationship that need to be fetch",
+                        "required": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "default": ""
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "path",
+                        "description": "Search with keyword",
+                        "required": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "searchJoin",
+                        "in": "path",
+                        "description": "Search Join",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "or"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Product response.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/Meta"
+                                        },
+                                        {
+                                            "properties": {
+                                                "data": {
+                                                    "description": "The list of all product",
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "allOf": [
+                                                            {
+                                                                "$ref": "#/components/schemas/Product"
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "You are not logged in."
+                    },
+                    "404": {
+                        "description": "Product not found"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Meta": {
+                "properties": {
+                    "meta": {
+                        "description": "Meta information of response.",
+                        "properties": {
+                            "include": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "pagination": {
+                                "type": "object",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/Pagination"
+                                    }
+                                ]
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "Pagination": {
+                "properties": {
+                    "total": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "count": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "per_page": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "current_page": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "total_pages": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
+                },
+                "type": "object"
+            },
+            "Product": {
+                "properties": {
+                    "id": {
+                        "description": "ID, It will generate when model has been created",
+                        "type": "string"
+                    },
+                    "name": {
+                        "description": "Product name",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Product description",
+                        "type": "string"
+                    },
+                    "reorder_level": {
+                        "description": "Product reorder_level",
+                        "type": "string"
+                    },
+                    "price": {
+                        "description": "Product price",
+                        "type": "int"
+                    },
+                    "year": {
+                        "description": "Product year",
+                        "type": "string"
+                    },
+                    "model": {
+                        "description": "Product model",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}

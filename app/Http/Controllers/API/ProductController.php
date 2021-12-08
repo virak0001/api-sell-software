@@ -2,33 +2,37 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Interfaces\Controllers\ProductControllerInterface;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\Product;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Validator;
 use App\Http\Resources\Product as ProductResource;
 
-class ProductController extends BaseController
+class ProductController extends BaseController implements ProductControllerInterface
 {
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request): JsonResponse
     {
-        $products = Product::all();
-
-        return $this->sendResponse(ProductResource::collection($products), 'Products retrieved successfully.');
+        $page = $request->has('page') ? $request->get('page') : 0;
+        $limit = $request->has('limit') ? $request->get('limit') : 1;
+        $products = DB::table('products')->skip($page)->take($limit)->get();
+        return response()->json(['data' => $products, 'page' => $page, 'limit' => $limit]);
     }
     /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return JsonResponse
      */
-    public function store(Request $request): Response
+    public function store(Request $request): JsonResponse
     {
         $input = $request->all();
 
@@ -50,9 +54,9 @@ class ProductController extends BaseController
      * Display the specified resource.
      *
      * @param int $id
-     * @return Response
+     * @return JsonResponse
      */
-    public function show(int $id): Response
+    public function show($id): JsonResponse
     {
         $product = Product::find($id);
 
@@ -67,39 +71,38 @@ class ProductController extends BaseController
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param Product $product
-     * @return Response
+     * @param $id
+     * @return JsonResponse
      */
-    public function update(Request $request, Product $product): Response
+    public function update(Request $request, $id): JsonResponse
     {
-        $input = $request->all();
+//        $input = $request->all();
+//
+//        $validator = Validator::make($input, [
+//            'name' => 'required',
+//            'detail' => 'required'
+//        ]);
+//
+//        if($validator->fails()){
+//            return $this->sendError('Validation Error.', $validator->errors());
+//        }
 
-        $validator = Validator::make($input, [
-            'name' => 'required',
-            'detail' => 'required'
-        ]);
+//        $product->name = $input['name'];
+//        $product->detail = $input['detail'];
+//        $product->save();
 
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
-        }
-
-        $product->name = $input['name'];
-        $product->detail = $input['detail'];
-        $product->save();
-
-        return $this->sendResponse(new ProductResource($product), 'Product updated successfully.');
+//        return $this->sendResponse(new ProductResource($product), 'Product updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param Product $product
-     * @return Response
+     * @param $id
+     * @return JsonResponse
      */
-    public function destroy(Product $product): Response
+    public function destroy($id): JsonResponse
     {
         $product->delete();
-
         return $this->sendResponse([], 'Product deleted successfully.');
     }
 }
