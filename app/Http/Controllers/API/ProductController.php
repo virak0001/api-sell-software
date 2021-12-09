@@ -22,7 +22,13 @@ class ProductController extends BaseController implements ProductControllerInter
     {
         $page = $request->has('page') ? $request->get('page') : 0;
         $limit = $request->has('limit') ? $request->get('limit') : 15;
-        $products = DB::table('products')->whereNull('deleted_at')->skip($page)->take($limit)->get();
+        $products = DB::table('products')
+            ->leftJoin('stocks', 'stocks.product_id', '=', 'products.id')
+            ->select('products.*', 'stocks.quantity')
+            ->whereNull('products.deleted_at')
+            ->skip($page)
+            ->take($limit)
+            ->get();
         return response()->json(['data' => $products, 'page' => $page, 'limit' => $limit]);
     }
     /**
@@ -41,17 +47,17 @@ class ProductController extends BaseController implements ProductControllerInter
             'description' => 'required'
         ]);
 
-        if($request->image_url != null){
+        if ($request->image_url != null) {
             request()->validate([
                 'image_url' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
-            $imageName = time().'.'.request()->image_url->extension();  
+            $imageName = time() . '.' . request()->image_url->extension();
             request()->image_url->move(public_path('/upload/'), $imageName);
             $input['image_url'] = $imageName;
         }
 
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
@@ -94,14 +100,14 @@ class ProductController extends BaseController implements ProductControllerInter
             'description' => 'required'
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
-        if($request->image_url != null){
+        if ($request->image_url != null) {
             request()->validate([
                 'image_url' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
-            $imageName = time().'.'.request()->image_url->extension();  
+            $imageName = time() . '.' . request()->image_url->extension();
             request()->image_url->move(public_path('/upload/'), $imageName);
             $input['image_url'] = $imageName;
         }
@@ -126,7 +132,7 @@ class ProductController extends BaseController implements ProductControllerInter
      */
     public function destroy($id): JsonResponse
     {
-        DB::table('products')->where('id',$id)->update(['deleted_at' => now()]);;
+        DB::table('products')->where('id', $id)->update(['deleted_at' => now()]);;
         return $this->sendResponse([], 'Product deleted successfully.');
     }
 }
