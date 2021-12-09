@@ -25,7 +25,7 @@ class RegisterController extends BaseController
         $input = $request->all();
         $findUser = DB::table('users')->where('email', '=', $input['email'])->get();
         if(!$findUser->isEmpty()) {
-            return $this->sendError('Email already exist.');
+            return $this->sendError('Email already exist.', 422);
         }
         $validator = Validator::make($request->all(), [
             'name' => 'required',
