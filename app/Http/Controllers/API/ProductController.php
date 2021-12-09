@@ -77,22 +77,23 @@ class ProductController extends BaseController implements ProductControllerInter
      */
     public function update(Request $request, $id): JsonResponse
     {
-//        $input = $request->all();
-//
-//        $validator = Validator::make($input, [
-//            'name' => 'required',
-//            'detail' => 'required'
-//        ]);
-//
-//        if($validator->fails()){
-//            return $this->sendError('Validation Error.', $validator->errors());
-//        }
+        $input = $request->all();
 
-//        $product->name = $input['name'];
-//        $product->detail = $input['detail'];
-//        $product->save();
+        $validator = Validator::make($input, [
+            'name' => 'required',
+            'price' => 'required',
+            'description' => 'required'
+        ]);
 
-//        return $this->sendResponse(new ProductResource($product), 'Product updated successfully.');
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $product->name = $input['name'];
+        $product->detail = $input['detail'];
+        $product->save();
+
+        return $this->sendResponse(new ProductResource($product), 'Product updated successfully.');
     }
 
     /**
@@ -103,7 +104,7 @@ class ProductController extends BaseController implements ProductControllerInter
      */
     public function destroy($id): JsonResponse
     {
-        $product->delete();
+        Product::deleted($id);
         return $this->sendResponse([], 'Product deleted successfully.');
     }
 }
