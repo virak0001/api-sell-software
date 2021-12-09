@@ -8,6 +8,7 @@ use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\User;
 use App\Models\Card;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 
@@ -21,6 +22,11 @@ class RegisterController extends BaseController
      */
     public function register(Request $request): JsonResponse
     {
+        $input = $request->all();
+        $findUser = DB::table('users')->where('email', '=', $input['email'])->get();
+        if(!$findUser->isEmpty()) {
+            return $this->sendError('Email already exist.');
+        }
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
@@ -32,7 +38,6 @@ class RegisterController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
-        $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
         $success['name'] =  $user->name;
