@@ -22,8 +22,8 @@ class ProductController extends BaseController implements ProductControllerInter
     public function index(Request $request): JsonResponse
     {
         $page = $request->has('page') ? $request->get('page') : 0;
-        $limit = $request->has('limit') ? $request->get('limit') : 1;
-        $products = DB::table('products')->skip($page)->take($limit)->get();
+        $limit = $request->has('limit') ? $request->get('limit') : 15;
+        $products = DB::table('products')->whereNull('deleted_at')->skip($page)->take($limit)->get();
         return response()->json(['data' => $products, 'page' => $page, 'limit' => $limit]);
     }
     /**
@@ -108,7 +108,7 @@ class ProductController extends BaseController implements ProductControllerInter
      */
     public function destroy($id): JsonResponse
     {
-        Product::deleted($id);
+        DB::table('products')->where('id',$id)->update(['deleted_at' => now()]);;
         return $this->sendResponse([], 'Product deleted successfully.');
     }
 }
