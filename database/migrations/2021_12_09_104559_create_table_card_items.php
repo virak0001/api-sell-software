@@ -13,7 +13,7 @@ class CreateTableCardItems extends Migration
      */
     public function up()
     {
-        Schema::create('table_card_items', function (Blueprint $table) {
+        Schema::create('card_items', function (Blueprint $table) {
 
             $table->foreignId('card_id')
             ->references('id')
