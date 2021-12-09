@@ -88,9 +88,13 @@ class ProductController extends BaseController implements ProductControllerInter
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());
         }
-
+        $product = Product::find($id);
         $product->name = $input['name'];
-        $product->detail = $input['detail'];
+        $product->description = $input['description'];
+        $product->reorder_level = $input['reorder_level'];
+        $product->price = $input['price'];
+        $product->year = $input['year'];
+        $product->model = $input['model'];
         $product->save();
 
         return $this->sendResponse(new ProductResource($product), 'Product updated successfully.');
