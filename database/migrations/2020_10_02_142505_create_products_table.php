@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->double('price');
             $table->date('year')->nullable();
             $table->string('model')->nullable();
+            $table->string('image_url');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -11,6 +11,9 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Validator;
 use App\Http\Resources\Product as ProductResource;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
+use App\Models\File;
 
 class ProductController extends BaseController implements ProductControllerInterface
 {
@@ -35,12 +38,22 @@ class ProductController extends BaseController implements ProductControllerInter
     public function store(Request $request): JsonResponse
     {
         $input = $request->all();
-
+        $product = new Product();
         $validator = Validator::make($input, [
             'name' => 'required',
             'price' => 'required',
             'description' => 'required'
         ]);
+
+        if($request->image_url != null){
+            request()->validate([
+                'image_url' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            $imageName = time().'.'.request()->image_url->extension();  
+            request()->image_url->move(public_path('/upload/'), $imageName);
+            $input['image_url'] = $imageName;
+        }
+
 
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());
@@ -88,6 +101,14 @@ class ProductController extends BaseController implements ProductControllerInter
         if($validator->fails()){
             return $this->sendError('Validation Error.', $validator->errors());
         }
+        if($request->image_url != null){
+            request()->validate([
+                'image_url' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            $imageName = time().'.'.request()->image_url->extension();  
+            request()->image_url->move(public_path('/upload/'), $imageName);
+            $input['image_url'] = $imageName;
+        }
         $product = Product::find($id);
         $product->name = $input['name'];
         $product->description = $input['description'];
@@ -95,6 +116,7 @@ class ProductController extends BaseController implements ProductControllerInter
         $product->price = $input['price'];
         $product->year = $input['year'];
         $product->model = $input['model'];
+        $product->url = $input['image_url'];
         $product->save();
 
         return $this->sendResponse(new ProductResource($product), 'Product updated successfully.');
