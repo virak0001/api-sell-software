@@ -85,19 +85,20 @@ class StockController extends BaseController
      * @param  \App\Models\Stock  $stock
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Stock $stock)
+    public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Stock  $stock
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function destroy(Stock $stock)
+    public function destroy($id): JsonResponse
     {
-        //
+        DB::table('stocks')->where('id',$id)->update(['deleted_at' => now()]);;
+        return $this->sendResponse([], 'Product deleted successfully.');
     }
 }
