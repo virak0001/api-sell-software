@@ -14,14 +14,17 @@ class CreateTableCardItems extends Migration
     public function up()
     {
         Schema::create('table_card_items', function (Blueprint $table) {
-            $table->unsignedBigInteger('card_id')->nullable(false);
-            $table->foreign('card_id')
+
+            $table->foreignId('card_id')
             ->references('id')
-            ->on('cards');
-            $table->unsignedBigInteger('product_id')->nullable(false);
-            $table->foreign('product_id')
+            ->on('cards')
+            ->onDelete('cascade');
+
+            $table->foreignId('product_id')
             ->references('id')
-            ->on('prodcuts');
+            ->on('products')
+            ->onDelete('cascade');
+
             $table->double('quantity');
             $table->timestamps();
         });
