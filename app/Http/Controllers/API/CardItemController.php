@@ -39,8 +39,9 @@ class CardItemController extends BaseController {
         }
         $checkIsExist = DB::table('card_items')->where('product_id', '=', $product->id)->where('card_id', '=', $card->id)->first();
         if($checkIsExist) {
-            DB::table('card_items')->where('product_id', '=', $product->id)->where('card_id', '=', $card->id);
-            return $this->sendError('Product not found!');
+            $value = ['quantity' => (int)$input['quantity'] + $checkIsExist->quantity];
+            DB::table('card_items')->where('product_id', '=', $product->id)->where('card_id', '=', $card->id)->update($value);
+            return Response() -> json($value);
         }
         $value = ['card_id' => $card->id, 'product_id' => $product->id, 'quantity' => (int)$input['quantity']];
         $cardItem = DB::table('card_items')->insert($value);
