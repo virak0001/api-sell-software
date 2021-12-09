@@ -7,13 +7,9 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\Product;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Validator;
 use App\Http\Resources\Product as ProductResource;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Session;
-use App\Models\File;
 
 class ProductController extends BaseController implements ProductControllerInterface
 {

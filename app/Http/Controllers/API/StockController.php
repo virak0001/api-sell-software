@@ -2,19 +2,26 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Resources\Stock as ResourcesStock;
+use App\Http\Controllers\API\BaseController as BaseController;
+use Illuminate\Http\JsonResponse;
 use App\Models\Stock;
 use Illuminate\Http\Request;
-
+use Validator;
+use Illuminate\Support\Facades\DB;
 class StockController extends BaseController
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+    * @return JsonResponse
      */
-    public function index()
+    public function index(Request $request): JsonResponse
     {
-        //
+        $page = $request->has('page') ? $request->get('page') : 0;
+        $limit = $request->has('limit') ? $request->get('limit') : 15;
+        $products = DB::table('stocks')->whereNull('deleted_at')->skip($page)->take($limit)->get();
+        return response()->json(['data' => $products, 'page' => $page, 'limit' => $limit]);
     }
 
     /**
@@ -24,18 +31,29 @@ class StockController extends BaseController
      */
     public function create()
     {
-        //
+        
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
-        //
+
+        $input = $request->all();
+        $validator = Validator::make($input, [
+            'name' => 'required',
+            'product_id' => 'required',
+            'description' => 'required'
+        ]);
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+        $stock = Stock::create($input);
+        return $this->sendResponse(new ResourcesStock($stock), 'Stock created successfully.');
     }
 
     /**

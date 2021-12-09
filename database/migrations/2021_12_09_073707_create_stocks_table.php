@@ -15,12 +15,15 @@ class CreateStocksTable extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('description');
             $table->double('quantity');
             $table->unsignedBigInteger('product_id')->nullable();
             $table->foreign('product_id')
             ->references('id')
             ->on('products')
             ->onDelete('set null');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

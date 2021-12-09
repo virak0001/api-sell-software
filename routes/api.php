@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\StockController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,7 @@ Route::post('login', [RegisterController::class, 'login']);
    
 Route::middleware('auth:api')->group( function () {
     Route::resource('products', ProductController::class);
+    Route::resource('stocks', StockController::class);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
