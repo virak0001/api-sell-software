@@ -23,19 +23,18 @@ class RegisterController extends BaseController
     public function register(Request $request): JsonResponse
     {
         $input = $request->all();
-        $findUser = DB::table('users')->where('email', '=', $input['email'])->get();
-        if(!$findUser->isEmpty()) {
-            return $this->sendError('Email already exist.', 422);
-        }
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required',
             'c_password' => 'required|same:password',
         ]);
-
         if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
+            return $this->sendError('Validation Error.', $validator->errors(), 404);
+        }
+        $findUser = DB::table('users')->where('email', '=', $input['email'])->get();
+        if(!$findUser->isEmpty()) {
+            return $this->sendError('Email already exist.', ['error'=>'Email already exist.'], 422);
         }
 
         $input['password'] = bcrypt($input['password']);
