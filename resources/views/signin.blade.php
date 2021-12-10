@@ -1,4 +1,4 @@
 @extends('layouts.app')
 @section('body')
-<product />
+<login />
 @stop
