@@ -15,7 +15,6 @@ class CardItem extends JsonResource
     public function toArray($request): array
     {
         return [
-            'user_id' => $this->user_id,
             'product_id' => $this->product_id,
             'quantity' => $this->quantity,
         ];
