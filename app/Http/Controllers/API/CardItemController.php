@@ -38,6 +38,7 @@ class CardItemController extends BaseController
                 'products.description',
                 'products.year',
                 'products.model',
+                'products.image_url',
                 'card_items.quantity as quantity'
             )
             ->skip($page)
@@ -52,6 +53,7 @@ class CardItemController extends BaseController
                 "year" => $data->year,
                 "model" => $data->model,
                 "quantity" => $data->quantity,
+                "image_url" => $data->image_url,
                 "subTotalPrice" => $data->quantity * $data->price,
             ];
         });
@@ -64,7 +66,7 @@ class CardItemController extends BaseController
      * @param Request $request
      * @return JsonResponse
      */
-    public function storeOrUpdate(Request $request): JsonResponse
+    public function store(Request $request): JsonResponse
     {
         $input = $request->all();
         $validator = Validator::make($input, [
@@ -85,11 +87,12 @@ class CardItemController extends BaseController
             $value = ['quantity' => (int)$input['quantity'] + $checkIsExist->quantity];
             DB::table('card_items')->where('product_id', '=', $product->id)->where('card_id', '=', $card->id)->update($value);
             return Response()->json($value);
-        }
-        $value = ['card_id' => $card->id, 'product_id' => $product->id, 'quantity' => (int)$input['quantity']];
-        $cardItem = DB::table('card_items')->insert($value);
-        if ($cardItem) {
-            return Response()->json($value);
+        } else {
+            $value = ['card_id' => $card->id, 'product_id' => $product->id, 'quantity' => (int)$input['quantity']];
+            $cardItem = DB::table('card_items')->insert($value);
+            if ($cardItem) {
+                return Response()->json($value);
+            }
         }
         return $this->sendError('Cannot add product to card!', $validator->errors());
     }
