@@ -21,7 +21,7 @@ class ProductController extends BaseController implements ProductControllerInter
     public function index(Request $request): JsonResponse
     {
         $page = $request->has('page') ? $request->get('page') : 0;
-        $limit = $request->has('limit') ? $request->get('limit') : 15;
+        $limit = $request->has('limit') ? $request->get('limit') : 500;
         $products = DB::table('products')
             ->leftJoin('stocks', 'stocks.product_id', '=', 'products.id')
             ->select('products.*', 'stocks.quantity')
@@ -53,7 +53,7 @@ class ProductController extends BaseController implements ProductControllerInter
             ]);
             $imageName = time() . '.' . request()->image_url->extension();
             request()->image_url->move(public_path('/upload/'), $imageName);
-            $input['image_url'] = $imageName;
+            $input['image_url'] = 'upload/'.$imageName;
         }
 
 
