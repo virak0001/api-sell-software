@@ -123,12 +123,13 @@
                       "
                     >
                       <a href="#" class="text-indigo-600 hover:text-indigo-900"
-                        >Edit</a
+                        >Order  </a
                       >
                     </td>
                   </tr>
                 </tbody>
               </table>
+              <h1 class="text-right font-medium"> Total Price: {{ totalPrice }}</h1>
             </div>
           </div>
         </div>
@@ -143,8 +144,13 @@ import axios from "axios";
 export default {
   data() {
     return {
-      cardList: {},
+      cardList: null,
     };
+  },
+  computed: {
+    totalPrice() {
+      return this.cardList.map((card) => +card.subTotalPrice).reduce((partial_sum, a) => partial_sum + a, 0);
+    }
   },
   async mounted() {
     await this.getCards();

@@ -2225,12 +2225,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      cardList: {}
+      cardList: null
     };
+  },
+  computed: {
+    totalPrice: function totalPrice() {
+      return this.cardList.map(function (card) {
+        return +card.subTotalPrice;
+      }).reduce(function (partial_sum, a) {
+        return partial_sum + a;
+      }, 0);
+    }
   },
   mounted: function mounted() {
     var _this = this;
@@ -5281,6 +5291,10 @@ var render = function () {
                           ),
                         ]
                       ),
+                      _vm._v(" "),
+                      _c("h1", { staticClass: "text-right font-medium" }, [
+                        _vm._v(" Total Price: " + _vm._s(_vm.totalPrice)),
+                      ]),
                     ]
                   ),
                 ]
@@ -5364,7 +5378,7 @@ var staticRenderFns = [
             staticClass: "text-indigo-600 hover:text-indigo-900",
             attrs: { href: "#" },
           },
-          [_vm._v("Edit")]
+          [_vm._v("Order  ")]
         ),
       ]
     )
