@@ -240,12 +240,13 @@ export default {
     async register() {
       try {
         const res = await axios.post("/api/register", this.user);
-        const { token } = res.data.token;
-        localStorage.setItem("token", token);
-        axios.defaults.headers.common["Authorization"] = token;
-      } catch (error) {
-        console.info(error.response.data.message);
-      }
+        if (res && res.data.success) {
+          const { token } = res.data.data;
+          localStorage.setItem("token", token);
+          axios.defaults.headers.common["Authorization"] = token;
+          window.location.href = "/";
+        }
+      } catch (error) {}
     },
   },
 };

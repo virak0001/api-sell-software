@@ -146,9 +146,7 @@ export default {
           axios.defaults.headers.common["Authorization"] = token;
           window.location.href = "/";
         }
-      } catch (error) {
-        console.info(error.response.data);
-      }
+      } catch (error) {}
     },
   },
 };

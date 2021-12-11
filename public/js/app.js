@@ -2246,15 +2246,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   window.location.href = "/";
                 }
 
-                _context.next = 10;
+                _context.next = 9;
                 break;
 
               case 7:
                 _context.prev = 7;
                 _context.t0 = _context["catch"](0);
-                console.info(_context.t0.response.data);
 
-              case 10:
+              case 9:
               case "end":
                 return _context.stop();
             }
@@ -2635,23 +2634,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 3:
                 res = _context.sent;
-                token = res.data.token.token;
-                localStorage.setItem("token", token);
-                (axios__WEBPACK_IMPORTED_MODULE_1___default().defaults.headers.common.Authorization) = token;
-                _context.next = 12;
+
+                if (res && res.data.success) {
+                  token = res.data.data.token;
+                  localStorage.setItem("token", token);
+                  (axios__WEBPACK_IMPORTED_MODULE_1___default().defaults.headers.common.Authorization) = token;
+                  window.location.href = "/";
+                }
+
+                _context.next = 9;
                 break;
 
-              case 9:
-                _context.prev = 9;
+              case 7:
+                _context.prev = 7;
                 _context.t0 = _context["catch"](0);
-                console.info(_context.t0.response.data.message);
 
-              case 12:
+              case 9:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 9]]);
+        }, _callee, null, [[0, 7]]);
       }))();
     }
   }
@@ -2889,22 +2892,26 @@ var default_layout = "default";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var tailwindcss_tailwind_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tailwindcss/tailwind.css */ "./node_modules/tailwindcss/tailwind.css");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var _views_layouts_app_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./views/layouts/app.vue */ "./resources/js/views/layouts/app.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var tailwindcss_tailwind_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tailwindcss/tailwind.css */ "./node_modules/tailwindcss/tailwind.css");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var _views_layouts_app_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./views/layouts/app.vue */ "./resources/js/views/layouts/app.vue");
 window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js")["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('login', (__webpack_require__(/*! ./components/Login */ "./resources/js/components/Login.vue")["default"]));
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('product', (__webpack_require__(/*! ./components/Product */ "./resources/js/components/Product.vue")["default"]));
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('register', (__webpack_require__(/*! ./components/Register */ "./resources/js/components/Register.vue")["default"]));
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('ProductDetailDialog', (__webpack_require__(/*! ./components/common/ProductDetailDialog */ "./resources/js/components/common/ProductDetailDialog.vue")["default"]));
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('verify', (__webpack_require__(/*! ./components/verify */ "./resources/js/components/verify.vue")["default"]));
+
+vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('login', (__webpack_require__(/*! ./components/Login */ "./resources/js/components/Login.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('product', (__webpack_require__(/*! ./components/Product */ "./resources/js/components/Product.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('register', (__webpack_require__(/*! ./components/Register */ "./resources/js/components/Register.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('ProductDetailDialog', (__webpack_require__(/*! ./components/common/ProductDetailDialog */ "./resources/js/components/common/ProductDetailDialog.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('verify', (__webpack_require__(/*! ./components/verify */ "./resources/js/components/verify.vue")["default"]));
+(axios__WEBPACK_IMPORTED_MODULE_0___default().defaults.headers.common.Authorization) = "bearee" + window.token;
 
 
 
-var app = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
+var app = new vue__WEBPACK_IMPORTED_MODULE_1__["default"]({
   el: '#app',
   components: {
-    App: _views_layouts_app_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    App: _views_layouts_app_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   }
 });
 
