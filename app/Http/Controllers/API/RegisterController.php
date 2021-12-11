@@ -43,7 +43,7 @@ class RegisterController extends BaseController
         $success['email'] =  $user->email;
         $success['token'] =  $user->createToken('MyApp')->accessToken;
         $card = new Card();
-        $card -> user_id = $user -> id;  
+        $card -> user_id = $user -> id; 
         $card -> save();
         return $this->sendResponse($success, 'User register successfully.');
     }
