@@ -2277,77 +2277,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _components_common_ProductDetailDialog_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/common/ProductDetailDialog.vue */ "./resources/js/components/common/ProductDetailDialog.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_common_ProductDetailDialog_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/common/ProductDetailDialog.vue */ "./resources/js/components/common/ProductDetailDialog.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    ProductDetailDialog: _components_common_ProductDetailDialog_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    ProductDetailDialog: _components_common_ProductDetailDialog_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
-      showModal: false
+      showModal: false,
+      products: {},
+      upload: 'upload/'
     };
   },
-  computed: {
-    products: function products() {
-      return [{
-        id: 1,
-        name: 'Earthen Bottle',
-        href: '#',
-        price: '$48',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg',
-        imageAlt: 'Tall slender porcelain bottle with natural clay textured body and cork stopper.'
-      }, {
-        id: 2,
-        name: 'Nomad Tumbler',
-        href: '#',
-        price: '$35',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg',
-        imageAlt: 'Olive drab green insulated bottle with flared screw lid and flat top.'
-      }, {
-        id: 3,
-        name: 'Focus Paper Refill',
-        href: '#',
-        price: '$89',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg',
-        imageAlt: 'Person using a pen to cross a task off a productivity paper card.'
-      }, {
-        id: 4,
-        name: 'Machined Mechanical Pencil',
-        href: '#',
-        price: '$35',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-        imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.'
-      }, {
-        id: 5,
-        name: 'Earthen Bottle',
-        href: '#',
-        price: '$48',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg',
-        imageAlt: 'Tall slender porcelain bottle with natural clay textured body and cork stopper.'
-      }, {
-        id: 6,
-        name: 'Nomad Tumbler',
-        href: '#',
-        price: '$35',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg',
-        imageAlt: 'Olive drab green insulated bottle with flared screw lid and flat top.'
-      }, {
-        id: 7,
-        name: 'Focus Paper Refill',
-        href: '#',
-        price: '$89',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg',
-        imageAlt: 'Person using a pen to cross a task off a productivity paper card.'
-      }, {
-        id: 8,
-        name: 'Machined Mechanical Pencil',
-        href: '#',
-        price: '$35',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-        imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.'
-      }];
-    }
+  mounted: function mounted() {
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _this.getProducts();
+
+            case 2:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
   },
   methods: {
     openProductDetail: function openProductDetail() {
@@ -2355,6 +2326,30 @@ __webpack_require__.r(__webpack_exports__);
     },
     closeDialog: function closeDialog() {
       this.showModal = false;
+    },
+    getProducts: function getProducts() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get("/api/products");
+
+              case 2:
+                res = _context2.sent;
+                _this2.products = res.data.data;
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
     }
   }
 });
@@ -2904,7 +2899,7 @@ vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('product', (__webpack_requ
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('register', (__webpack_require__(/*! ./components/Register */ "./resources/js/components/Register.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('ProductDetailDialog', (__webpack_require__(/*! ./components/common/ProductDetailDialog */ "./resources/js/components/common/ProductDetailDialog.vue")["default"]));
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].component('verify', (__webpack_require__(/*! ./components/verify */ "./resources/js/components/verify.vue")["default"]));
-(axios__WEBPACK_IMPORTED_MODULE_0___default().defaults.headers.common.Authorization) = "bearee" + window.token;
+(axios__WEBPACK_IMPORTED_MODULE_0___default().defaults.headers.Authorization) = "Bearer ".concat(window.localStorage.getItem('token'));
 
 
 
@@ -5021,7 +5016,6 @@ var render = function () {
             {
               staticClass:
                 "grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8",
-              on: { click: _vm.openProductDetail },
             },
             _vm._l(_vm.products, function (product) {
               return _c(
@@ -5030,6 +5024,11 @@ var render = function () {
                   key: product.id,
                   staticClass: "group",
                   attrs: { href: product.href },
+                  on: {
+                    click: function ($event) {
+                      return _vm.openProductDetail(product.id)
+                    },
+                  },
                 },
                 [
                   _c(
@@ -5041,30 +5040,57 @@ var render = function () {
                     [
                       _c("img", {
                         staticClass: "w-full h-full object-center object-cover",
-                        attrs: { src: product.imageSrc, alt: product.imageAlt },
+                        attrs: {
+                          src: product.image_url,
+                          alt: product.imageAlt,
+                        },
                       }),
                     ]
                   ),
                   _vm._v(" "),
-                  _c("h3", { staticClass: "mt-4 text-sm text-gray-700" }, [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(product.name) +
-                        "\n                "
-                    ),
-                  ]),
-                  _vm._v(" "),
                   _c(
-                    "p",
-                    { staticClass: "mt-1 text-lg font-medium text-gray-900" },
+                    "h3",
+                    { staticClass: "t-1 text-lg font-medium text-green-900" },
                     [
                       _vm._v(
                         "\n                    " +
-                          _vm._s(product.price) +
+                          _vm._s(product.name) +
                           "\n                "
                       ),
                     ]
                   ),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "mt-1" }, [
+                    _vm._v(
+                      "\n                    Pirice: " +
+                        _vm._s(product.price) +
+                        "\n                "
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "mt-1" }, [
+                    _vm._v(
+                      "\n                    Description: " +
+                        _vm._s(product.description) +
+                        "\n                "
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "mt-1" }, [
+                    _vm._v(
+                      "\n                    Year: " +
+                        _vm._s(product.year) +
+                        "\n                "
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "mt-1" }, [
+                    _vm._v(
+                      "\n                    Model: " +
+                        _vm._s(product.model) +
+                        "\n                "
+                    ),
+                  ]),
                 ]
               )
             }),

@@ -6,7 +6,8 @@ Vue.component('register', require('./components/Register').default)
 Vue.component('ProductDetailDialog', require('./components/common/ProductDetailDialog').default)
 Vue.component('verify', require('./components/verify').default)
 
-axios.defaults.headers.common['Authorization'] = `bearee`+window.token;
+axios.defaults.headers['Authorization'] = `Bearer ${window.localStorage.getItem('token')}`;
+
 
 
 import "tailwindcss/tailwind.css"
