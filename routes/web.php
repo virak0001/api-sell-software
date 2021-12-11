@@ -25,3 +25,6 @@ Route::get('register',function() {
 Route::get('verify',function() {
     return view('verify');
 });
+Route::get('view-card',function() {
+    return view('viewCard');
+});
