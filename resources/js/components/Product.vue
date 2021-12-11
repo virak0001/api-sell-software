@@ -20,7 +20,7 @@
     </div>
 </template>
 <script lang="ts">
-import ProductDetailDialog from '../components/common/ProductDetailDialog'
+import ProductDetailDialog from '../components/common/ProductDetailDialog.vue'
 export default {
     components: {ProductDetailDialog},
     data() {
@@ -102,7 +102,6 @@ export default {
             this.showModal = true
        },
        closeDialog(){
-           console.info(this.showModal)
            this.showModal = false
        }
    }
