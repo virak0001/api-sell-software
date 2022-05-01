@@ -7,11 +7,7 @@
                         <a href="/" class="flex items-center py-4 px-2">
                             <img src="workflow-mark.svg" alt="Logo" class="h-8 w-8 mr-2" />
                         </a>
-                        <a href="/" class="py-4 px-2 ">All Software</a>
-                        <a href="" class="py-4 px-2 ">Windows</a>
-                        <a href="" class="py-4 px-2 ">Mac</a>
-                        <a href="" class="py-4 px-2">Linux</a>
-                        <a href="" class="py-4 px-2">Mining Software</a>
+                        <a href="/" class="py-4 px-2 ">Coffee list</a>
                     </div>
                 </div>
                 <div class="flex space-x-7">
@@ -25,7 +21,7 @@
                                 <path stroke-inecap="round" stroke-linejoin="round" stroke-width={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
                         </a>
-                        <a href="" class="py-4 px-2 flex">
+                        <a href="view-card" class="py-4 px-2 flex">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                             </svg>

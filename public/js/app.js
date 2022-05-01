@@ -3031,10 +3031,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
 
 /***/ }),
@@ -5589,7 +5585,9 @@ var render = function () {
             "max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8",
         },
         [
-          _c("h2", { staticClass: "sr-only" }, [_vm._v("Products")]),
+          _c("h1", { staticClass: "text-center text-4xl" }, [
+            _vm._v("Conffe Lists"),
+          ]),
           _vm._v(" "),
           _c(
             "div",
@@ -6180,31 +6178,35 @@ var render = function () {
               ),
             ]),
             _vm._v(" "),
-            _c("a", { staticClass: "py-4 px-2 flex", attrs: { href: "" } }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "h-6 w-6",
-                  attrs: {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    fill: "none",
-                    viewBox: "0 0 24 24",
-                    stroke: "currentColor",
-                  },
-                },
-                [
-                  _c("path", {
+            _c(
+              "a",
+              { staticClass: "py-4 px-2 flex", attrs: { href: "view-card" } },
+              [
+                _c(
+                  "svg",
+                  {
+                    staticClass: "h-6 w-6",
                     attrs: {
-                      "stroke-linecap": "round",
-                      "stroke-linejoin": "round",
-                      "stroke-width": "2",
-                      d: "M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z",
+                      xmlns: "http://www.w3.org/2000/svg",
+                      fill: "none",
+                      viewBox: "0 0 24 24",
+                      stroke: "currentColor",
                     },
-                  }),
-                ]
-              ),
-              _vm._v("\n                        0\n                    "),
-            ]),
+                  },
+                  [
+                    _c("path", {
+                      attrs: {
+                        "stroke-linecap": "round",
+                        "stroke-linejoin": "round",
+                        "stroke-width": "2",
+                        d: "M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z",
+                      },
+                    }),
+                  ]
+                ),
+                _vm._v("\n                        0\n                    "),
+              ]
+            ),
           ]),
         ]),
       ]),
@@ -6230,23 +6232,7 @@ var staticRenderFns = [
         ),
         _vm._v(" "),
         _c("a", { staticClass: "py-4 px-2 ", attrs: { href: "/" } }, [
-          _vm._v("All Software"),
-        ]),
-        _vm._v(" "),
-        _c("a", { staticClass: "py-4 px-2 ", attrs: { href: "" } }, [
-          _vm._v("Windows"),
-        ]),
-        _vm._v(" "),
-        _c("a", { staticClass: "py-4 px-2 ", attrs: { href: "" } }, [
-          _vm._v("Mac"),
-        ]),
-        _vm._v(" "),
-        _c("a", { staticClass: "py-4 px-2", attrs: { href: "" } }, [
-          _vm._v("Linux"),
-        ]),
-        _vm._v(" "),
-        _c("a", { staticClass: "py-4 px-2", attrs: { href: "" } }, [
-          _vm._v("Mining Software"),
+          _vm._v("Coffee list"),
         ]),
       ]),
     ])
