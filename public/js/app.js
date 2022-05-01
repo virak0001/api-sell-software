@@ -5613,11 +5613,12 @@ var render = function () {
                     "div",
                     {
                       staticClass:
-                        "\n            w-full\n            aspect-w-1 aspect-h-1\n            bg-gray-200\n            rounded-lg\n            overflow-hidden\n            xl:aspect-w-7 xl:aspect-h-8\n          ",
+                        "\n            aspect-w-1 aspect-h-1\n            rounded-lg\n            overflow-hidden\n            xl:aspect-w-7 xl:aspect-h-8\n          ",
                     },
                     [
                       _c("img", {
-                        staticClass: "w-full h-full object-center object-cover",
+                        staticClass:
+                          "w-full h-full object-center object-cover mx-auto",
                         attrs: {
                           src: product.image_url,
                           alt: product.imageAlt,
@@ -5642,14 +5643,6 @@ var render = function () {
                   _vm._v(" "),
                   _c("p", { staticClass: "mt-1" }, [
                     _vm._v("Description: " + _vm._s(product.description)),
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "mt-1" }, [
-                    _vm._v("Year: " + _vm._s(product.year)),
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "mt-1" }, [
-                    _vm._v("Model: " + _vm._s(product.model)),
                   ]),
                   _vm._v(" "),
                   _c(

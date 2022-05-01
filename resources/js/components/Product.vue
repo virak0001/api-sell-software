@@ -23,9 +23,7 @@
         >
           <div
             class="
-              w-full
               aspect-w-1 aspect-h-1
-              bg-gray-200
               rounded-lg
               overflow-hidden
               xl:aspect-w-7 xl:aspect-h-8
@@ -34,7 +32,7 @@
             <img
               :src="product.image_url"
               :alt="product.imageAlt"
-              class="w-full h-full object-center object-cover"
+              class="w-full h-full object-center object-cover mx-auto"
             />
           </div>
           <h3 class="t-1 text-lg font-medium text-green-900">
@@ -42,8 +40,6 @@
           </h3>
           <p class="mt-1">Pirice: {{ product.price }}</p>
           <p class="mt-1">Description: {{ product.description }}</p>
-          <p class="mt-1">Year: {{ product.year }}</p>
-          <p class="mt-1">Model: {{ product.model }}</p>
           <button
             @click.stop="addToCard(product.id)"
             class="
