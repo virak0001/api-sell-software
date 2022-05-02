@@ -100,9 +100,7 @@ export default {
             product_id: id,
             quantity: 1
         }
-        console.info(card)
         const res = await axios.post("/api/card-items", card);
-        console.info(res)
         if(res.data) {
             alert('Add item to card success')
         }
