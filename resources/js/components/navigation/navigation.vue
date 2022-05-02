@@ -35,5 +35,25 @@
 </template>
 
 <script>
-export default {}
+import axios from 'axios';
+export default {
+    data() {
+    return {
+      auth: {},
+     };
+    },
+
+    async mounted() {
+        await this.getMe()
+    },
+
+    methods: {
+    async getMe() {
+      try {
+        const res = await axios.get("/api/me");
+        this.auth = res.data
+      } catch (error) {}
+    },
+    }
+}
 </script>

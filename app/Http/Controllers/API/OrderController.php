@@ -1,11 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Http\Controllers\API\BaseController as BaseController;
+use Illuminate\Support\Facades\Auth;
+use App\Models\StripeCustomer;
+use Stripe\Stripe;
 
-class OrderController extends Controller
+class OrderController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -22,9 +26,9 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -35,7 +39,61 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $user = Auth::user();
+        // $customer_id = $user->get('customer_id');
+        // $customer;
+        // if(!$customer_id) {
+        //     $custmer = StripeCustomer::createCustomer($request, $user);
+        // }
+        // $order_number = rand(100000, 999999);
+        // StripeCustomer::createCustomer
+
+        // $user = Auth()->user();
+        // $charge = \Stripe\Charge::create(array(
+        //     'customer'  => $customer->id,
+        //     'amount'  => $request("total_amount"),
+        //     'currency'  => $request("currency_code"),
+        //     'description' => $request("item_details"),
+        //     'metadata'  => array(
+        //         'order_id'  => $order_number
+        //     )
+        // ));
+        // print_r($user);
+        // dd($user);
+        // return response()->json(['data' => $user]);
+        $input = $request->all();
+
+        $user = Auth()->user();
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        $customer = \Stripe\Customer::create(array(
+        'email'   => $user->email,
+        'source'  => $input["token_id"],
+        'name'   => $user->name,
+        'address'  => array(
+            'line1'   => 'Need implement',
+            'postal_code' => 'Need implement',
+            'city'   => 'Need implement',
+            'state'   => 'Need implement',
+            'country'  => 'Cambodia'
+        )
+        ));
+
+        $order_number = rand(100000, 999999);
+ 
+        $charge = \Stripe\Charge::create(array(
+            'customer'  => $customer->id,
+            'amount'  => 100,
+            'currency'  => 'usd',
+            'description' => 'Testing mode',
+            // 'source'  => $input["token_id"],
+            'metadata'  => array(
+                'order_id'  => $order_number
+            )
+        ));
+    
+        $response = $charge->jsonSerialize();
+        return response()->json(['data' => $response]);
     }
 
     /**
