@@ -44,7 +44,7 @@
       </div>
     </div>
     <div class="flex justify-between">
-        <button class="bg-red-500 hover:bg-red-700 float-right text-white font-bold py-2 px-4 border border-red-700 rounded">CANCEL</button>
+        <button @click="cancelModel" class="bg-red-500 hover:bg-red-700 float-right text-white font-bold py-2 px-4 border border-red-700 rounded">CANCEL</button>
         <button @click="createToken" class="bg-blue-500 hover:blue-red-700 float-right text-white font-bold py-2 px-4 border border-blue-700 rounded">ORDER</button>
     </div>
   </div>
@@ -79,9 +79,11 @@ export default {
  },
  methods: {
    
-    confirm() {
-      console.warn(this.$refs.card)
-    },
+   cancelModel(){
+     console.warn('GGG')
+     this.$emit('cancel')
+   },
+
   createAndMountFormElements() {
     var elements = this.stripe.elements();
     this.cardCvc = elements.create('cardCvc');

@@ -130,12 +130,12 @@
                 </tbody>
               </table>
             </div>
-              <button class="bg-blue-500 hover:bg-blue-700 float-right text-white font-bold py-2 px-4 border border-blue-700 rounded">
+              <button @click="confirmOrder()" class="bg-blue-500 hover:bg-blue-700 float-right text-white font-bold py-2 px-4 border border-blue-700 rounded">
               ORDER CONFIRM
               </button>
           </div>
             <div v-if="showModal" class="overflow-x-hidden backdrop-opacity-5 overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex bg-gray-50 opacity-80">
-              <payment />
+              <payment @cancel="cancel()" />
             </div>
         </div>
       </div>
@@ -150,7 +150,7 @@ export default {
   data() {
     return {
       cardList: {},
-      showModal: true
+      showModal: false
     };
   },
   async mounted() {
@@ -161,43 +161,12 @@ export default {
       const res = await axios.get("/api/card-items");
       this.cardList = res.data.data;
     },
-
-    async createOne(data) {
-      console.warn('HHHHHHH')
-      const res = await axios.post('/api/orders', { token_id: data.token_id })
-      console.warn(res)
+    cancel() {
+      this.showModal = false
+    },
+    confirmOrder() {
+      this.showModal = true
     }
   },
 };
 </script>
-<style>
-.StripeElement {
-  border: 2px solid var(--v-secondary-base);
-  border-radius: 6px;
-  padding-left: 12px;
-  padding-right: 12px;
-  padding-top: 18px;
-  padding-bottom: 18px;
-  line-height: 1.375rem;
-  transition: border 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
-  font-family: 'Quicksand', sans-serif !important;
-}
-
-.StripeElement:hover {
-  border: 2px solid grey;
-}
-
-.StripeElement--focus,
-.StripeElement--focus:hover {
-  border: 2px solid var(--v-primary-base);
-}
-
-.StripeElement--invalid,
-.StripeElement--invalid:hover,
-.StripeElement.StripeElement--error.StripeElement--empty,
-.StripeElement--invalid.StripeElement.StripeElement--error,
-.StripeElement--invalid.StripeElement.StripeElement--error:hover,
-.StripeElement--invalid.StripeElement.StripeElement--error:focus {
-  border: 2px solid var(--v-error-base);
-}
-</style>
