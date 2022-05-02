@@ -2231,12 +2231,132 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       cardList: {},
-      showModal: false
+      successItem: {},
+      showModal: false,
+      auth: {}
     };
   },
   mounted: function mounted() {
@@ -2251,6 +2371,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return _this.getCards();
 
             case 2:
+              _context.next = 4;
+              return _this.getMe();
+
+            case 4:
+              _context.next = 6;
+              return _this.getOrderSucess();
+
+            case 6:
             case "end":
               return _context.stop();
           }
@@ -2286,8 +2414,66 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     cancel: function cancel() {
       this.showModal = false;
     },
+    getOrderSucess: function getOrderSucess() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get("/api/orders");
+
+              case 2:
+                res = _context3.sent;
+                _this3.successItem = res.data.data;
+
+              case 4:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
     confirmOrder: function confirmOrder() {
-      this.showModal = true;
+      // if(this.auth.customer_id) {
+      // axios.post('/api/orders', {})
+      // } else {
+      this.showModal = true; // }
+    },
+    getMe: function getMe() {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                _context4.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get("/api/me");
+
+              case 3:
+                res = _context4.sent;
+                _this4.auth = res.data;
+                _context4.next = 9;
+                break;
+
+              case 7:
+                _context4.prev = 7;
+                _context4.t0 = _context4["catch"](0);
+
+              case 9:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, null, [[0, 7]]);
+      }))();
     }
   }
 });
@@ -2829,19 +3015,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   product_id: id,
                   quantity: 1
                 };
-                console.info(card);
-                _context3.next = 4;
+                _context3.next = 3;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default().post("/api/card-items", card);
 
-              case 4:
+              case 3:
                 res = _context3.sent;
-                console.info(res);
 
                 if (res.data) {
                   alert('Add item to card success');
                 }
 
-              case 7:
+              case 5:
               case "end":
                 return _context3.stop();
             }
@@ -5755,6 +5939,124 @@ var render = function () {
                     },
                     [_vm._v("\n            ORDER CONFIRM\n            ")]
                   ),
+                  _vm._v(" "),
+                  _c("h1", { staticClass: "text-center font-medium" }, [
+                    _vm._v("Your order success"),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "\n              shadow\n              overflow-hidden\n              border-b border-gray-200\n              sm:rounded-lg\n            ",
+                    },
+                    [
+                      _c(
+                        "table",
+                        { staticClass: "min-w-full divide-y divide-gray-200" },
+                        [
+                          _vm._m(2),
+                          _vm._v(" "),
+                          _c(
+                            "tbody",
+                            {
+                              staticClass: "bg-white divide-y divide-gray-200",
+                            },
+                            _vm._l(_vm.successItem, function (card) {
+                              return _c("tr", { key: card.id }, [
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass: "px-6 py-4 whitespace-nowrap",
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      { staticClass: "flex items-center" },
+                                      [
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass:
+                                              "flex-shrink-0 h-10 w-10",
+                                          },
+                                          [
+                                            _c("img", {
+                                              staticClass:
+                                                "w-full h-full object-center object-cover",
+                                              attrs: {
+                                                src: card.image_url,
+                                                alt: "",
+                                              },
+                                            }),
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("div", { staticClass: "ml-4" }, [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "text-sm font-medium text-gray-900",
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                          " +
+                                                  _vm._s(card.name) +
+                                                  "\n                        "
+                                              ),
+                                            ]
+                                          ),
+                                        ]),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass: "px-6 py-4 whitespace-nowrap",
+                                  },
+                                  [
+                                    _c(
+                                      "div",
+                                      { staticClass: "text-sm text-gray-500" },
+                                      [
+                                        _vm._v(
+                                          "\n                      " +
+                                            _vm._s(card.quantity) +
+                                            "\n                    "
+                                        ),
+                                      ]
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass:
+                                      "px-6 py-4 whitespace-nowrap  text-sm text-gray-500",
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                    " +
+                                        _vm._s(card.subTotalPrice) +
+                                        "\n                  "
+                                    ),
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _vm._m(3, true),
+                              ])
+                            }),
+                            0
+                          ),
+                        ]
+                      ),
+                    ]
+                  ),
                 ]
               ),
               _vm._v(" "),
@@ -5785,6 +6087,82 @@ var render = function () {
   ])
 }
 var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "bg-gray-50" }, [
+      _c("tr", [
+        _c(
+          "th",
+          {
+            staticClass:
+              "\n                      px-6\n                      py-3\n                      text-left text-xs\n                      font-medium\n                      text-gray-500\n                      uppercase\n                      tracking-wider\n                    ",
+            attrs: { scope: "col" },
+          },
+          [_vm._v("\n                    Name\n                  ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass:
+              "\n                      px-6\n                      py-3\n                      text-left text-xs\n                      font-medium\n                      text-gray-500\n                      uppercase\n                      tracking-wider\n                    ",
+            attrs: { scope: "col" },
+          },
+          [_vm._v("\n                    quantity\n                  ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass:
+              "\n                      px-6\n                      py-3\n                      text-left text-xs\n                      font-medium\n                      text-gray-500\n                      uppercase\n                      tracking-wider\n                    ",
+            attrs: { scope: "col" },
+          },
+          [_vm._v("\n                    Description\n                  ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          {
+            staticClass:
+              "\n                      px-6\n                      py-3\n                      text-left text-xs\n                      font-medium\n                      text-gray-500\n                      uppercase\n                      tracking-wider\n                    ",
+            attrs: { scope: "col" },
+          },
+          [_vm._v("\n                    Sub total\n                  ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "th",
+          { staticClass: "relative px-6 py-3", attrs: { scope: "col" } },
+          [_c("span", { staticClass: "sr-only" }, [_vm._v("Edit")])]
+        ),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "td",
+      {
+        staticClass:
+          "\n                      px-6\n                      py-4\n                      whitespace-nowrap\n                      text-right text-sm\n                      font-medium\n                    ",
+      },
+      [
+        _c(
+          "a",
+          {
+            staticClass: "text-indigo-600 hover:text-indigo-900",
+            attrs: { href: "#" },
+          },
+          [_vm._v("Edit")]
+        ),
+      ]
+    )
+  },
   function () {
     var _vm = this
     var _h = _vm.$createElement

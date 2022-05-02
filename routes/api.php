@@ -8,6 +8,7 @@ use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\StockController;
 use App\Http\Controllers\API\CardItemController;
 use App\Http\Controllers\API\OrderController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,8 @@ Route::middleware('auth:api')->group( function () {
     Route::resource('orders', OrderController::class);
     Route::get('/me', function(){
         $user = Auth::user();
-        return response()->json($user,200);
+        $userDAta = User::find(Auth()->user()->id);
+        return response()->json($userDAta,200);
       });
 });
 

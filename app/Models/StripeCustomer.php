@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Stripe;
-class StripeModel extends Model
+use Stripe\Stripe;
+use Illuminate\Http\Request;
+class StripeCustomer extends Model
 {
     use HasFactory;
 
     public function createCard(Request $request,$customer)
     {
-        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        Stripe::setApiKey(env('STRIPE_SECRET'));
         $response = \Stripe\Token::create(array(
             "customer" => $custome->get('id'),
             "card" => array(
@@ -23,21 +24,22 @@ class StripeModel extends Model
           )));
     }
 
-    public function createCustomer(Request $request, $user)
+    public static function createCustomer(Request $request, $user)
     {
-        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+        $input = $request->all();
         $customer = \Stripe\Customer::create(array(
-            'email' =>  $request->input("email_address"),
-            'source' =>  $request->input("token"),
-            'name'  => $request->input("customer_name"),
+            'email'   => $user->email,
+            'source'  => $input["token_id"],
+            'name'   => $user->name,
             'address'  => array(
-                'line1'  =>  $request->input("customer_address"),
-                'postal_code' => $request->input("customer_pin"),
-                'city'  =>  $request->input("customer_city"),
-                'state'  =>  $request->input("customer_state"),
-                'country'  => 'US'
+                'line1'   => 'Need implement',
+                'postal_code' => 'Need implement',
+                'city'   => 'Need implement',
+                'state'   => 'Need implement',
+                'country'  => 'Cambodia'
             )
-        ));
+            ));
         return $customer;
     }
 }
