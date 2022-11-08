@@ -28,7 +28,11 @@ Route::middleware('auth:api')->group( function () {
         return response()->json($userData,200);
     });
     Route::resource('/appointments', AppointmentController::class);
-    Route::put('/verify-app/{id}', [AppointmentController::class, 'confirmOrCancel']);
+    Route::put('/admin/verify-app/{id}', [AppointmentController::class, 'confirmOrCancel'])->middleware(['admin']);;
+    // Route::put('/admin/verify-app/{id}', ['middleware' => 'admin']);
+    // Route::prefix('admin')-> group(function () {
+    //     Route::put('/verify-app/{id}', [AppointmentController::class, 'confirmOrCancel']);
+    // });
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
