@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Card extends Model
+class Clinic extends Model
 {
     use HasFactory;
 
@@ -15,6 +15,7 @@ class Card extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id'
+        'name',
+        'description'
     ];
 }

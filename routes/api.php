@@ -3,11 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\API\RegisterController;
-use App\Http\Controllers\API\ProductController;
-use App\Http\Controllers\API\StockController;
-use App\Http\Controllers\API\CardItemController;
-use App\Http\Controllers\API\OrderController;
+use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\AppointmentController;
 use App\Models\User;
 
 /*
@@ -21,19 +18,17 @@ use App\Models\User;
 |
 */
 
-Route::post('register', [RegisterController::class, 'register']);
-Route::post('login', [RegisterController::class, 'login']);
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
    
 Route::middleware('auth:api')->group( function () {
-    Route::resource('products', ProductController::class);
-    Route::resource('stocks', StockController::class);
-    Route::resource('card-items', CardItemController::class);
-    Route::resource('orders', OrderController::class);
     Route::get('/me', function(){
         $user = Auth::user();
-        $userDAta = User::find(Auth()->user()->id);
-        return response()->json($userDAta,200);
-      });
+        $userData = User::find(Auth()->user()->id);
+        return response()->json($userData,200);
+    });
+    Route::resource('/appointments', AppointmentController::class);
+    Route::put('/verify-app/{id}', [AppointmentController::class, 'confirmOrCancel']);
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
