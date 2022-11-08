@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
-use App\Models\Card;
-use Illuminate\Http\Request;
+use App\Models\Clinic;
+use App\Http\Requests\StoreClinicRequest;
+use App\Http\Requests\UpdateClinicRequest;
 
-class CardController extends Controller
+class ClinicController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -30,10 +31,10 @@ class CardController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreClinicRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreClinicRequest $request)
     {
         //
     }
@@ -41,10 +42,10 @@ class CardController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Card  $card
+     * @param  \App\Models\Clinic  $clinic
      * @return \Illuminate\Http\Response
      */
-    public function show(Card $card)
+    public function show(Clinic $clinic)
     {
         //
     }
@@ -52,10 +53,10 @@ class CardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Card  $card
+     * @param  \App\Models\Clinic  $clinic
      * @return \Illuminate\Http\Response
      */
-    public function edit(Card $card)
+    public function edit(Clinic $clinic)
     {
         //
     }
@@ -63,11 +64,11 @@ class CardController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Card  $card
+     * @param  \App\Http\Requests\UpdateClinicRequest  $request
+     * @param  \App\Models\Clinic  $clinic
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Card $card)
+    public function update(UpdateClinicRequest $request, Clinic $clinic)
     {
         //
     }
@@ -75,10 +76,10 @@ class CardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Card  $card
+     * @param  \App\Models\Clinic  $clinic
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Card $card)
+    public function destroy(Clinic $clinic)
     {
         //
     }

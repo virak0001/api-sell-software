@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStocksTable extends Migration
+class CreateAppointmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,15 @@ class CreateStocksTable extends Migration
      */
     public function up()
     {
-        Schema::create('stocks', function (Blueprint $table) {
+        Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
-            $table->double('quantity');
-            $table->unsignedBigInteger('product_id')->nullable();
-            $table->foreign('product_id')
-            ->references('id')
-            ->on('products')
-            ->onDelete('set null');
-            $table->softDeletes();
+            $table->date('started_at');
+            $table->date('ended_at');
+            $table->string('patient_id');
+            $table->string('clinic_id');
+            $table->double('price');
+            $table->enum('status', ['PENDING', 'CONFIRM', 'CANCEL'])->default('PENDING');
             $table->timestamps();
         });
     }
@@ -35,6 +33,6 @@ class CreateStocksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stocks');
+        Schema::dropIfExists('appointments');
     }
 }

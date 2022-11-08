@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 
-class RegisterController extends BaseController
+class AuthController extends BaseController
 {
     /**
      * Register api
@@ -41,10 +41,6 @@ class RegisterController extends BaseController
         $user = User::create($input);
         $success['name'] =  $user->name;
         $success['email'] =  $user->email;
-        $success['token'] =  $user->createToken('MyApp')->accessToken;
-        $card = new Card();
-        $card -> user_id = $user -> id; 
-        $card -> save();
         return $this->sendResponse($success, 'User register successfully.');
     }
 
