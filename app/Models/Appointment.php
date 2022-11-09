@@ -33,13 +33,11 @@ class Appointment extends Model
     }
 
     static function updateApp(UpdateAppointmentRequest $request, Appointment $appointment){
+        $user = Auth::user();
         $input = $request->all();
-        $appointment = Appointment::where('id',$input['id'])->update($input);
-        return Appointment::find($input['id']);
-    }
-
-    static function confirmOrCancle(UpdateAppointmentRequest $request, Appointment $appointment){
-        $input = $request->all();
+        if($user['role'] != 'ADMIN') {
+            $input['status'] = 'CANCEL';
+        }
         $appointment = Appointment::where('id',$input['id'])->update($input);
         return Appointment::find($input['id']);
     }

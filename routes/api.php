@@ -28,11 +28,10 @@ Route::middleware('auth:api')->group( function () {
         return response()->json($userData,200);
     });
     Route::resource('/appointments', AppointmentController::class);
-    Route::put('/admin/verify-app/{id}', [AppointmentController::class, 'confirmOrCancel'])->middleware(['admin']);;
-    // Route::put('/admin/verify-app/{id}', ['middleware' => 'admin']);
-    // Route::prefix('admin')-> group(function () {
-    //     Route::put('/verify-app/{id}', [AppointmentController::class, 'confirmOrCancel']);
-    // });
+    Route::put('/cancel-appointment/{id}', [AppointmentController::class, 'cancel']);
+
+    // Admin
+    Route::put('/admin/verify-appointment/{id}', [AppointmentController::class, 'confirmOrCancel'])->middleware(['admin']);;
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

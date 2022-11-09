@@ -82,13 +82,22 @@ class AppointmentController extends BaseController
      * @return \Illuminate\Http\Response
      */
 
-    public function confirmOrCancel(UpdateAppointmentRequest $request, Appointment $appointment)
+    public function cancel(UpdateAppointmentRequest $request, Appointment $appointment)
     {
         $input = $request->all();
         $validator = Validator::make($request->all(), [
             'status' => 'required',
         ]);
         return $this->sendResponse(Appointment::updateApp($request, $appointment), $input['status'] . 'success!');
+    }
+
+    public function confirmOrCancel(UpdateAppointmentRequest $request, Appointment $appointment)
+    {
+        $input = $request->all();
+        $validator = Validator::make($request->all(), [
+            'status' => 'required',
+        ]);
+        return $this->sendResponse(Appointment::updateApp($request, $appointment), 'Your confirm was successfuly!');
     }
 
     /**
